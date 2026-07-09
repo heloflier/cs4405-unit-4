@@ -34,8 +34,12 @@ final class GreenhouseClimateControlTests: XCTestCase {
 
     // MARK: - 1b: Edge cases and invalid input
 
+    func testWithinValidRange_returnsValue() throws {
+        // 300K — comfortably within 175K–350K, converter must return a result
+    }
+
     func testAbsoluteZero_returnsValue() throws {
-        // 0K is valid — the lower physical boundary
+        // 0K — required edge case; the converter must handle the physical lower bound
     }
 
     func testNilInput_returnsNil() throws {
@@ -46,16 +50,12 @@ final class GreenhouseClimateControlTests: XCTestCase {
         // Physically impossible — treat as sensor fault
     }
 
-    func testBelowCropRange_returnsNil() throws {
-        // Below freezing (e.g. 272K ≈ -1°C) — outside agricultural range
-    }
-
-    func testAboveCropRange_returnsNil() throws {
-        // Above crop survival threshold (e.g. 325K ≈ 52°C) — too hot for any greenhouse crop
+    func testBelowEarthRecord_returnsNil() throws {
+        // Below 175K (~-98°C, safely below the lowest temperature ever recorded on Earth) — faulty sensor reading
     }
 
     func testSensorSpike_returnsNil() throws {
-        // Above 350K (~77°C, well above any temperature recordable on Earth) — faulty sensor reading
+        // Above 350K (~77°C, the highest temperature ever recorded on Earth) — faulty sensor reading
     }
 
 }
