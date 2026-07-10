@@ -13,23 +13,19 @@ final class GreenhouseClimateControlTests: XCTestCase {
     // MARK: - 1a: Standard conversions
 
     func testCelsiusConversion_roomTemperature_returnsValue() throws {
-        // 300K → 26.85°C (a realistic greenhouse reading)
+        let result = try XCTUnwrap(TemperatureConverter.toCelsius(kelvin: 300))
+        XCTAssertEqual(result, 26.85, accuracy: 0.01)
     }
 
     func testFahrenheitConversion_roomTemperature_returnsValue() throws {
-        // 300K → 80.33°F
-    }
-
-    func testCelsiusConversion_boilingPoint_returns100() throws {
-        // 373.15K → 100°C (well-known reference value)
-    }
-
-    func testFahrenheitConversion_boilingPoint_returns212() throws {
-        // 373.15K → 212°F (well-known reference value)
+        let result = try XCTUnwrap(TemperatureConverter.toFahrenheit(kelvin: 300))
+        XCTAssertEqual(result, 80.33, accuracy: 0.01)
     }
 
     func testCelsiusAndFahrenheitAreConsistent() throws {
-        // F = C × 9/5 + 32 must hold for the same Kelvin input
+        let celsius = try XCTUnwrap(TemperatureConverter.toCelsius(kelvin: 300))
+        let fahrenheit = try XCTUnwrap(TemperatureConverter.toFahrenheit(kelvin: 300))
+        XCTAssertEqual(fahrenheit, celsius * 9 / 5 + 32, accuracy: 0.001)
     }
 
     // MARK: - 1b: Edge cases and invalid input
