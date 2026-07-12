@@ -1,4 +1,4 @@
-# Greenhouse Climate Control — Temperature Conversion Logic
+# Greenhouse Climate Control — Temperature Conversion Logic - Unit Tests
 
 Unit-tested Swift logic for converting greenhouse sensor readings from Kelvin to Celsius and Fahrenheit, built for CS4405 (Mobile Application Development) at the University of the People.
 
